@@ -1,0 +1,20 @@
+Package: suffpcr
+Title: Sufficient Principal Component Regression
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Daniel J.",
+           family = "McDonald",
+           role = c("aut", "cre"),
+           email = "daniel@stat.ubc.ca")
+Description: What the package does (one paragraph).
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports: 
+    fps (>= 0.1),
+    assertthat,
+    irlba
+Remotes: 
+    Lei-D/fps@fps_irlba
