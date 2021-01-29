@@ -17,7 +17,7 @@ compute_lambda <- function(S, maxnvar, nsol,
   if (is.null(lambda_min)) lambda_min <- maxoffdiag[maxnvar]
   # lambda_min = 0
   lambda <- switch(
-    type,
+    lambda_seq,
     linear = seq(from = lambda_max, to = lambda_min, length.out = nsol),
     loglinear = lambda_min * log10(seq(1, 10, length.out = nsol)) +
       lambda_max * (1 - log10(seq(1, 10, length.out = nsol)))
@@ -32,7 +32,7 @@ compute_maxoffdiag <- function(S) {
   # S is the input matrix which is symmetric
   D <- diag(S)
   n <- nrow(S)
-  S <- S - Matrix::diag(n, D)
+  S <- S - Matrix::Diagonal(n, D)
 
   apply(S, 1, function(x) max(abs(x)))
 }

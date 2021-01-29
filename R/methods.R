@@ -1,44 +1,70 @@
-
-predict.suffpcr <- function(object, newdata = NULL, response = NULL, i = NULL,
-                            d = NULL, ...){
-
+#' Method for returning predictions of a fitted suffPCR object
+#'
+#' @param object a suffPCR object, created by [suffPCR()]
+#' @param newdata optionally, a matrix of variables with
+#'   which to predict. If omitted, the fitted linear predictors are used.
+#' @param type the type of prediction required. The default is on the scale of
+#'   the linear predictors; the alternative "response" is on the scale of the
+#'   response variable. Thus for a default binomial model the default
+#'   predictions are of log-odds (probabilities on logit scale) and
+#'   type = "response" gives the predicted probabilities.
+#' @param i optional vector of lambda indices to retrieve
+#' @param d optional vector of d indices to retrieve
+#' @param ... ignored
+#'
+#' @return
+#' @export
+predict.suffPCR <- function(object, newdata = NULL,
+                            type = c("link", "response"),
+                            i = NULL, d = NULL, ...){
+  type <- match.arg(type, c("link","response"))
   family <- object$family
   assertthat::assert_that(
-    is.null(newdata) || ncol(object$Xtrain) == ncol(newdata),
+    is.null(newdata) || ncol(object$X) == ncol(newdata),
     msg = paste("In predict: if newdata is provided it must have the same",
                 "number of columns as the original Xtrain."))
   if (is.null(newdata)) {
-    newdata <- object$Xtrain
+    newdata <- object$X
   } else {
     newdata <- scale(newdata, object$xmeans, object$xsd)
   }
-  s <- grab_idx(object$nsol, object$d, i, d)
-  mult <- length(s) > 1
-  bhat <- object$betahat[-c(1:2), s]
-  inter <- object$intercept[-c(1:2), s]
-  linterms <- object$ymean + Xtrain %*% bhat
-  if (family == "logistic") {
-    probs = logistic(linterms)
-    mse.train[k, i] = mean((Ytrain.prob - Ytrain)^2)
+  bhat <- coef(object, i=i, d=d)
+  inter <- c(grab_intr(object, i, d))
+  linterms <-  newdata %*% bhat + tcrossprod(rep(1, nrow(newdata)), inter)
+  if (family == "binomial" && type == "response") linterms <- logistic(linterms)
 
-    cutoffs = sort(Ytrain.prob)
-    accuracy = rep(NA, n)
-    for (j in 1:n){
-      prediction = ifelse(Ytrain.prob >= cutoffs[j], 1, 0)
-      accuracy[j] = mean(Ytrain == prediction) * 100
-    }
-    accuracy.train[k, i] = max(accuracy)
-    cutoffs = cutoffs[which.max(accuracy)]
-    cutoff.best = cutoffs[which.min(abs(cutoffs - 0.5))]
-    # cutoff.best = 0.5
-  }
+  return(drop(linterms))
 }
 
 
 
-grab_idx <- function(nsol, modd, i, d){
-  ii <- rep(seq_len(nsol), times = modd)
-  dd <- rep(seq_len(modd), each = nsol)
+#' Method for returning coefficients of a fitted suffPCR object
+#'
+#' @param object a suffPCR object, created by [suffPCR()]
+#' @param i optional vector of lambda indices to retrieve
+#' @param d optional vector of d indices to retrieve
+#' @param ... ignored
+#'
+#' @return a (sparse) matrix of coefficients. Each column corresponds to one
+#'   lambda x d estimate
+#' @export
+coef.suffPCR <- function(object, i = NULL, d = NULL, ...){
+  s <- grab_idx(object$n_lambda, length(object$d), i, d)
+  bhat <- object$betahat[, s]
+  bhat
+}
+
+grab_intr <- function(object, i, d) {
+  nd <- length(object$d)
+  if (is.null(i)) i <- seq_len(object$n_lambda)
+  if (is.null(d)) d <- seq_len(nd)
+  object$intercept[i,d]
+}
+
+
+grab_idx <- function(nlam, nd, i, d){
+  ii <- rep(seq_len(nlam), times = nd)
+  dd <- rep(seq_len(nd), each = nlam)
   if (is.null(i)) {
     i <- seq_along(ii)
   } else {
