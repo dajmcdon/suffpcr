@@ -2,16 +2,19 @@
 # suffpcr
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/dajmcdon/suffpcr/workflows/R-CMD-check/badge.svg)](https://github.com/dajmcdon/suffpcr/actions)
 <!-- badges: end -->
 
-The goal of suffpcr is to ...
+The goal of suffpcr is to estimate sufficient principal component regression
+by implementing row-sparse PCA followed by ordinary least squares or logistic
+regression.
 
 ## Installation
 
-You can install the released version of suffpcr from [CRAN](https://CRAN.R-project.org) with:
+You can install the package with
 
 ``` r
-install.packages("suffpcr")
+remotes::install_github("dajmcdon/suffpcr")
 ```
 
 ## Example
