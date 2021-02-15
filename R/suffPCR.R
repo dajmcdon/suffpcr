@@ -12,8 +12,8 @@
 #' a response variable. This results in a sparse model with sparse linear
 #' combinations of features used for the final prediction
 #'
-#' @param Xtrain n by p matrix of features
-#' @param Ytrain length n response
+#' @param X n by p matrix of features
+#' @param Y length n response
 #' @param family optional family argument to implement regression ("gaussian",
 #'   the default) or classification ("binomial")
 #' @param d target PC dimension
@@ -27,8 +27,16 @@
 #'   scale between the minimum and maximum
 #' @param screening do we screen as in algorithm 2
 #'
-#' @return
+#' @return an object of class "suffPCR" containing estimated coefficients,
+#'   lambda values, the norms of Vhat and a number of additional components.
+#'
+#'   Both [predict()] and [coef()] methods are available for accessing.
 #' @export
+#' @importFrom stats sd glm coef
+#'
+#' @source See [Github vqv/fps](https://github.com/vqv/fps) for the original
+#'   (non-approximate) implementation of fps upon which ours is based along with
+#'   the paper [Fantope Projection and Selection (NeurIPS 2013)](https://proceedings.neurips.cc/paper/2013/hash/81e5f81db77c596492e6f1a5a792ed53-Abstract.html).
 #'
 #' @examples
 #' n <- 100
@@ -108,7 +116,7 @@ suffPCR <- function(X, Y, family = c("gaussian", "binomial"),
         vhat[abs(vhat) < 1e-10] <-  0
         pchat = X %*% vhat
         # fit linear model
-        model = glm(Y ~ pchat, family = family)
+        model = stats::glm(Y ~ pchat, family = family)
         gamhat = as.matrix(coef(model)[-1], ncol = 1)
         inter <- coef(model)[1]
         betahat = vhat %*% gamhat

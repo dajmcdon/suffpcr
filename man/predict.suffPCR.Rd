@@ -32,7 +32,8 @@ type = "response" gives the predicted probabilities.}
 \item{...}{ignored}
 }
 \value{
-
+a matrix (or vector) of predicted values. Each column corresponds to
+one lambda x d estimate
 }
 \description{
 Method for returning predictions of a fitted suffPCR object

@@ -1,12 +1,16 @@
 Package: suffpcr
 Title: Sufficient Principal Component Regression
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: 
     person(given = "Daniel J.",
            family = "McDonald",
            role = c("aut", "cre"),
            email = "daniel@stat.ubc.ca")
-Description: What the package does (one paragraph).
+Description: This package implements sufficient principal component regression.
+    The name derives from the fact that "row-sparse" principal components 
+    imply variable selection in PCR. Thus, we first implement an approximate 
+    version of Fantope Projection and Selection (FPS, see documentation) before
+    performing additional variable selection and regression.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -15,6 +19,12 @@ RoxygenNote: 7.1.1
 Imports: 
     fps (>= 0.1),
     assertthat,
-    irlba
+    irlba,
+    stats,
+    Matrix,
+    stringr,
+    tibble
 Remotes: 
     Lei-D/fps@fps_irlba
+Depends: 
+    R (>= 2.10)

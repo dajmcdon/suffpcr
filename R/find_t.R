@@ -1,3 +1,4 @@
+#' @importFrom stats var
 findt <- function(x){
   # this function returns the best threshold t for a sorted x
   # input x is a sorted x in ascending order

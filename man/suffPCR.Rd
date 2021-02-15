@@ -3,6 +3,11 @@
 \name{suffPCR}
 \alias{suffPCR}
 \title{Sufficient principal component regression}
+\source{
+See \href{https://github.com/vqv/fps}{Github vqv/fps} for the original
+(non-approximate) implementation of fps upon which ours is based along with
+the paper \href{https://proceedings.neurips.cc/paper/2013/hash/81e5f81db77c596492e6f1a5a792ed53-Abstract.html}{Fantope Projection and Selection (NeurIPS 2013)}.
+}
 \usage{
 suffPCR(
   X,
@@ -19,6 +24,10 @@ suffPCR(
 )
 }
 \arguments{
+\item{X}{n by p matrix of features}
+
+\item{Y}{length n response}
+
 \item{family}{optional family argument to implement regression ("gaussian",
 the default) or classification ("binomial")}
 
@@ -39,13 +48,12 @@ and less than lambda_max}
 scale between the minimum and maximum}
 
 \item{screening}{do we screen as in algorithm 2}
-
-\item{Xtrain}{n by p matrix of features}
-
-\item{Ytrain}{length n response}
 }
 \value{
+an object of class "suffPCR" containing estimated coefficients,
+lambda values, the norms of Vhat and a number of additional components.
 
+Both \code{\link[=predict]{predict()}} and \code{\link[=coef]{coef()}} methods are available for accessing.
 }
 \description{
 Estimates principal component regression (or classification) under the

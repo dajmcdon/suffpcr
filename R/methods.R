@@ -12,7 +12,8 @@
 #' @param d optional vector of d indices to retrieve
 #' @param ... ignored
 #'
-#' @return
+#' @return a matrix (or vector) of predicted values. Each column corresponds to
+#'   one lambda x d estimate
 #' @export
 predict.suffPCR <- function(object, newdata = NULL,
                             type = c("link", "response"),
