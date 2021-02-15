@@ -23,6 +23,14 @@ This is a basic example which shows you how to solve a common problem:
 
 ``` r
 library(suffpcr)
-## basic example code
+n <- 100
+p <- 50
+U <- rnorm(n)
+V <- c(rnorm(5), rep(0, p - 5))
+V <- V / sqrt(sum(V^2))
+bstar <- V * (5 / (5.1))
+X <- 5 * tcrossprod(U, V) + 0.1 * matrix(rnorm(n * p), n)
+y <- U + rnorm(n)
+out <- suffPCR(X, y, d=1:3)
 ```
 

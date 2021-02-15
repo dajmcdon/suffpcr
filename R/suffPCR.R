@@ -47,8 +47,8 @@
 #' bstar <- V * (5 / (5.1))
 #' X <- 5 * tcrossprod(U, V) + 0.1 * matrix(rnorm(n * p), n)
 #' y <- U + rnorm(n)
-#' out <- suffPCR(X, y, d=1:3)
-suffPCR <- function(X, Y, family = c("gaussian", "binomial"),
+#' out <- suffpcr(X, y, d = 1:3)
+suffpcr <- function(X, Y, family = c("gaussian", "binomial"),
                     d = 3, n_lambda = 10, maxnvar = ncol(X),
                     lambda = NULL, lambda_max = NULL,
                     lambda_min = NULL,
