@@ -1,6 +1,6 @@
-#' Method for returning predictions of a fitted suffPCR object
+#' Method for returning predictions of a fitted suffpcr object
 #'
-#' @param object a suffPCR object, created by [suffPCR()]
+#' @param object a suffpcr object, created by [suffpcr()]
 #' @param newdata optionally, a matrix of variables with
 #'   which to predict. If omitted, the fitted linear predictors are used.
 #' @param type the type of prediction required. The default is on the scale of
@@ -15,7 +15,7 @@
 #' @return a matrix (or vector) of predicted values. Each column corresponds to
 #'   one lambda x d estimate
 #' @export
-predict.suffPCR <- function(object, newdata = NULL,
+predict.suffpcr <- function(object, newdata = NULL,
                             type = c("link", "response"),
                             i = NULL, d = NULL, ...){
   type <- match.arg(type, c("link","response"))
@@ -39,9 +39,9 @@ predict.suffPCR <- function(object, newdata = NULL,
 
 
 
-#' Method for returning coefficients of a fitted suffPCR object
+#' Method for returning coefficients of a fitted suffpcr object
 #'
-#' @param object a suffPCR object, created by [suffPCR()]
+#' @param object a suffpcr object, created by [suffpcr()]
 #' @param i optional vector of lambda indices to retrieve
 #' @param d optional vector of d indices to retrieve
 #' @param ... ignored
@@ -49,7 +49,7 @@ predict.suffPCR <- function(object, newdata = NULL,
 #' @return a (sparse) matrix of coefficients. Each column corresponds to one
 #'   lambda x d estimate
 #' @export
-coef.suffPCR <- function(object, i = NULL, d = NULL, ...){
+coef.suffpcr <- function(object, i = NULL, d = NULL, ...){
   s <- grab_idx(object$n_lambda, length(object$d), i, d)
   bhat <- object$betahat[, s]
   bhat

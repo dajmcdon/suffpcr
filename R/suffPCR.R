@@ -143,6 +143,6 @@ suffpcr <- function(X, Y, family = c("gaussian", "binomial"),
               xsd = xsd,
               d = d, n_lambda = n_lambda,
               lambda = lambda)
-  class(out) <- "suffPCR"
+  class(out) <- "suffpcr"
   return(out)
 }
