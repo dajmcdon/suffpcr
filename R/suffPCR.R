@@ -1,9 +1,3 @@
-# install packages from github for first time user
-# library(devtools)
-# install_github("Lei-D/irlba", ref="lei")
-# install_github("Lei-D/fps", ref="fps_irlba")
-
-
 #' Sufficient principal component regression
 #'
 #' Estimates principal component regression (or classification) under the
