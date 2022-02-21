@@ -3,6 +3,7 @@
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/dajmcdon/suffpcr/workflows/R-CMD-check/badge.svg)](https://github.com/dajmcdon/suffpcr/actions)
+[![pkgdown](https://github.com/dajmcdon/suffpcr/workflows/pkgdown/badge.svg)](https://github.com/dajmcdon/suffpcr/actions)
 <!-- badges: end -->
 
 The goal of suffpcr is to estimate sufficient principal component regression
