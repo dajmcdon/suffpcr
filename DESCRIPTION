@@ -25,6 +25,7 @@ Imports:
     stringr,
     tibble
 Remotes: 
-    dajmcdon/fps@fix-irlba-linking
+    dajmcdon/fps@irlba
 Depends: 
     R (>= 2.10)
+URL: https://dajmcdon.github.io/suffpcr/

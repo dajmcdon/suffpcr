@@ -1,0 +1,13 @@
+url: https://dajmcdon.github.io/sparsegl/
+
+template:
+  bootstrap: 5
+  bootswatch: lux
+  bslib:
+    pkgdown-nav-height: 100px
+    primary: "#041E42"
+    bg: "#fafafa"
+    fg: "#041E42"
+
+navbar:
+  bg: primary
