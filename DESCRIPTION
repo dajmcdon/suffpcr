@@ -14,6 +14,7 @@ Description: This package implements sufficient principal component regression.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+LazyDataCompression: bzip2
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Imports: 
