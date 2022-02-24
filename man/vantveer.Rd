@@ -9,9 +9,12 @@ A list with 4 named components:
 \describe{
 \item{x}{gene expression measurements for 78 patients on 4751 genes}
 \item{gene_info}{a character vector containing descriptions of the genes}
-\item{survivial_time}{time in days the patient survived, possibly right
+\item{survivial_time}{time in months before disease recurrence, possibly right
 sensored}
-\item{survival_status}{a zero/one indicator of whether the patient died}
+\item{survival_status}{a zero/one indicator of whether the patient
+had a "good" or "poor" prognosis based on whether or not disease
+recurred within 5 years.
+}
 }
 }
 \source{
@@ -22,7 +25,7 @@ outcome of breast cancer. \emph{Nature}, 415(6871):530, 2002.
 vantveer
 }
 \description{
-A dataset containing gene expression measurements, how long the patient
-survived, whether they survived, and information about the genes.
+A dataset containing gene expression measurements, time to disease recurrence,
+whether the prognosis was "good" or "poor", and information about the genes.
 }
 \keyword{datasets}

@@ -9,7 +9,7 @@ A list with  named components:
 \describe{
 \item{x}{gene expression measurements for 240 patients on 7399 genes}
 \item{gene_info}{a tibble containing descriptions of the genes}
-\item{survivial_time}{time in days the patient survived, possibly right
+\item{survivial_time}{time in years the patient survived, possibly right
 sensored}
 \item{survival_status}{a zero/one indicator of whether the patient died}
 }
